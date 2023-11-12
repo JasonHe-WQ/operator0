@@ -1,0 +1,27 @@
+# permissions for end users to view mysqlclusters.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: clusterrole
+    app.kubernetes.io/instance: mysqlcluster-viewer-role
+    app.kubernetes.io/component: rbac
+    app.kubernetes.io/created-by: operator0
+    app.kubernetes.io/part-of: operator0
+    app.kubernetes.io/managed-by: kustomize
+  name: mysqlcluster-viewer-role
+rules:
+- apiGroups:
+  - mysql.example.com
+  resources:
+  - mysqlclusters
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - mysql.example.com
+  resources:
+  - mysqlclusters/status
+  verbs:
+  - get
