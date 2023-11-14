@@ -230,6 +230,12 @@ func (r *MySQLClusterReconciler) reconcileStatefulSet(ctx context.Context, clust
 							Name:  "mysql",
 							Image: "mysql:8.0",
 							// ...
+							Ports: []corev1.ContainerPort{
+								{
+									Name:          "mysql",
+									ContainerPort: 3306,
+								},
+							},
 							Resources: cluster.Spec.Resources,
 							ReadinessProbe: &corev1.Probe{
 								ProbeHandler: corev1.ProbeHandler{
@@ -297,6 +303,12 @@ func (r *MySQLClusterReconciler) reconcileStatefulSet(ctx context.Context, clust
 						{
 							Name:  "xtrabackup",
 							Image: "gcr.io/google-samples/xtrabackup:1.0",
+							Ports: []corev1.ContainerPort{
+								{
+									Name:          "xtrabackup",
+									ContainerPort: 3307,
+								},
+							},
 							Command: []string{
 								"bash",
 								"-c",
